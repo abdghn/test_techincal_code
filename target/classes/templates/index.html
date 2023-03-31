@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<input id="number" type="number" placeholder="Input Angka" />
+<br/>
+<button id="generateNumber">Generate Angka</button>
+<button id="generateOdd">Generate Bilangan Ganjil</button>
+<button id="generatePrime">Generate Bilangan Prima</button>
+<br/>
+<h1>Result :</h1>
+<div id="container">
+
+</div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $("#generateNumber").click(function () {
+        $.ajax({
+            type : "GET",
+            url : "http://localhost:8080/generateNumber",
+            data: {
+                caseNumber: "normal",
+                number: $("#number").val()
+            },
+            complete : function(result) {
+                for(let i = 0; i < result.length; i++) {
+                    $("#container").append( `<p>${result[i]}</p>` )
+                }
+            },
+            error : function(e) {
+                $("#getResultDiv").html("<strong>HATA | ERROR</strong>");
+                alert("ERROR: " + e)
+            }
+        });
+    })
+
+    $("#generateOdd").click(function () {
+        $.ajax({
+            type : "GET",
+            url : "http://localhost:8080/generateNumber",
+            data: {
+                caseNumber: "odd",
+                number: $("#number").val()
+            },
+            complete : function(result) {
+                for(let i = 0; i < result.length; i++) {
+                    $("#container").append( `<p>${result[i]}</p>` )
+                }
+            },
+            error : function(e) {
+                alert("ERROR: " + e)
+            }
+        });
+    })
+
+    $("#generatePrime").click(function () {
+
+
+        $.ajax({
+            type : "GET",
+            url : "http://localhost:8080/generateNumber",
+            data: {
+                caseNumber: "prime",
+                number: $("#number").val()
+            },
+            complete : function(result) {
+                for(let i = 0; i < result.length; i++) {
+                    $("#container").append( `<p>${result[i]}</p>` )
+                }
+            },
+            error : function(e) {
+                alert("ERROR: " + e)
+            }
+        });
+    })
+
+</script>
+</html>
